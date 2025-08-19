@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Diario di Viaggi — Mappa Interattiva</title>
+  <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+    <!--Contiene il titolo del sito e la nav (link rapidi). È position: sticky nel CSS per restare in alto mentre scrolli.-->
+  <header>
+    <h1>Il mio Diario di Viaggi</h1>
+    <nav aria-label="Menu">
+      <a href="#viaggi" style="color:#cfe9ff; text-decoration:none; margin-right:10px;">Viaggi</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="map-wrap">
+      <h2 class="map-title">Mappa interattiva — passa il cursore e clicca</h2>
+
+      <div class="map" id="map">
+        <img src="img/planisfero.jpg" alt="Planisfero" id="planisphere">
+
+        <!-- HOTSPOTS: regola top/left o usa data-x/data-y -->
+        <button class="hotspot" style="top:46%; left:26%;" data-target="portogallo" aria-label="Portogallo">
+          <span class="label">Portogallo</span>
+        </button>
+
+        <button class="hotspot" style="top:52%; left:22%;" data-target="marocco" aria-label="Marocco">
+          <span class="label">Marocco</span>
+        </button>
+
+        <button class="hotspot" style="top:55%; left:72%;" data-target="thailandia" aria-label="Thailandia">
+          <span class="label">Thailandia</span>
+        </button>
+
+        <button class="hotspot" style="top:78%; left:60%;" data-target="sudafrica" aria-label="Sud Africa">
+          <span class="label">Sud Africa</span>
+        </button>
+
+        <button class="hotspot" style="top:74%; left:48%;" data-target="namibia" aria-label="Namibia">
+          <span class="label">Namibia</span>
+        </button>
+      </div>
+    </div>
+
+    <section id="viaggi" style="margin-top:18px;">
+      <article id="portogallo" class="travel" tabindex="0" aria-labelledby="por-title">
+        <img src="img/portogallo.jpg" alt="Portogallo — Lisbona">
+        <div class="meta">
+          <h2 id="por-title">Portogallo</h2>
+          <p>Breve racconto del viaggio in Portogallo: Lisbona, Porto, tram gialli e cucina deliziosa.</p>
+        </div>
+      </article>
+
+      <article id="marocco" class="travel" tabindex="0" aria-labelledby="mar-title">
+        <img src="img/marocco.jpg" alt="Marocco — Marrakech">
+        <div class="meta">
+          <h2 id="mar-title">Marocco</h2>
+          <p>Il Marocco tra souk, deserti e città colorate. Note, consigli e fotografie.</p>
+        </div>
+      </article>
+
+      <article id="thailandia" class="travel" tabindex="0" aria-labelledby="tha-title">
+        <img src="img/thailandia.jpg" alt="Thailandia — Phuket">
+        <div class="meta">
+          <h2 id="tha-title">Thailandia</h2>
+          <p>Spiagge, mercati notturni e un sacco di street food: il racconto del mio viaggio.</p>
+        </div>
+      </article>
+
+      <article id="sudafrica" class="travel" tabindex="0" aria-labelledby="saf-title">
+        <img src="img/sudafrica.jpg" alt="Sud Africa — Safari">
+        <div class="meta">
+          <h2 id="saf-title">Sud Africa</h2>
+          <p>Safari, coste spettacolari e la forza della natura.</p>
+        </div>
+      </article>
+
+      <article id="namibia" class="travel" tabindex="0" aria-labelledby="nam-title">
+        <img src="img/namibia.jpg" alt="Namibia — Dune">
+        <div class="meta">
+          <h2 id="nam-title">Namibia</h2>
+          <p>Dune rosse, paesaggi lunari e avventure on the road.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 — Il tuo nome · Prova mappa interattiva
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

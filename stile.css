@@ -1,0 +1,171 @@
+:root{
+    --accent:#ff6b6b;
+    --accent-2:#ffd166;
+    --bg:#0f1723;
+    --card:#ffffff;
+    --glass: rgba(255,255,255,0.06);
+  }
+  
+  /* Corpo */
+  body{
+    margin:0;
+    font-family: Inter, system-ui, Arial, sans-serif;
+    background: linear-gradient(180deg,#071024 0%, #0f1723 100%);
+    color:#e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px;
+    position:sticky;
+    top:0;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    z-index:40;
+  }
+  header h1{ margin:0; font-size:1.15rem; color:var(--card); }
+  
+  .container{
+    max-width:1100px;
+    margin:28px auto;
+    padding:18px;
+    gap:20px;
+  }
+  
+  /* MAP AREA */
+  .map-wrap{
+    position:relative;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05));
+    border-radius:14px;
+    padding:18px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+  }
+  
+  .map{
+    width:100%;
+    height:520px;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    background-color:#111827;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .map img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    filter: saturate(1.05) contrast(1.02);
+  }
+  
+  /* Hotspots */
+  .hotspot{
+    position:absolute;
+    width: var(--hotspot-size, 34px);
+    height: var(--hotspot-size, 34px);
+    border-radius:50%;
+    transform: translate(-50%,-50%) scale(1);
+    border:2px solid rgba(255,255,255,0.9);
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.06));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    transition: transform .18s ease, box-shadow .18s ease;
+    z-index:30;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    outline:none;
+  }
+  .hotspot::after{
+    content:"";
+    position:absolute;
+    width: calc(var(--hotspot-size,34px) * 0.42);
+    height: calc(var(--hotspot-size,34px) * 0.42);
+    border-radius:50%;
+    background:var(--accent);
+    opacity:0;
+    transition: opacity .18s ease, transform .18s ease;
+    transform: scale(.6);
+  }
+  
+  .hotspot:hover,
+  .hotspot:focus{
+    transform: translate(-50%,-50%) scale(1.12);
+    box-shadow: 0 8px 26px rgba(0,0,0,0.6), 0 0 28px rgba(255,107,107,0.28);
+  }
+  .hotspot:hover::after,
+  .hotspot:focus::after{
+    opacity:1;
+    transform: scale(1.4);
+  }
+  
+  /* Tooltip */
+  .hotspot .label{
+    position:absolute;
+    bottom:calc(100% + 10px);
+    left:50%;
+    transform:translateX(-50%);
+    background:var(--glass);
+    color:var(--card);
+    padding:6px 10px;
+    border-radius:8px;
+    font-size:0.85rem;
+    white-space:nowrap;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .12s ease, transform .12s ease;
+    transform-origin:bottom center;
+  }
+  .hotspot:hover .label,
+  .hotspot:focus .label{
+    opacity:1;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  
+  /* Sezioni viaggio */
+  section.travel{
+    margin-top:24px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    padding:18px;
+    border-radius:12px;
+    color:#081122;
+    display:grid;
+    grid-template-columns: 280px 1fr;
+    gap:16px;
+    align-items:start;
+  }
+  .travel img{
+    width:100%;
+    height:100%;
+    max-height:220px;
+    object-fit:cover;
+    border-radius:10px;
+  }
+  .travel .meta{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .travel h2{ margin:0; color:var(--accent); }
+  .travel p{ margin:0; color:#0b1a2b; line-height:1.45; }
+  
+  /* Responsive */
+  @media (max-width:880px){
+    .map{ height:420px; }
+    section.travel{ grid-template-columns: 1fr; }
+    .hotspot{ width:28px; height:28px; }
+    .hotspot::after{ width:10px; height:10px; }
+  }
+  
+  /* Footer */
+  footer{ color:#9fb2c8; text-align:center; padding:28px 0; font-size:0.9rem; }
+  
+  .map-title{ color:var(--accent-2); margin:0 0 12px 6px; }
+  
