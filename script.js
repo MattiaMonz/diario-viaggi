@@ -1,42 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // scroll morbido e animazione evidenza
-    document.querySelectorAll('.hotspot').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const id = btn.getAttribute('data-target');
-        const el = document.getElementById(id);
-        if(el){
-          el.scrollIntoView({behavior:'smooth', block:'start'});
-          el.style.transition = 'box-shadow .45s ease, transform .25s ease';
-          el.style.boxShadow = '0 20px 60px rgba(0,0,0,0.45)';
-          el.style.transform = 'translateY(-6px)';
-          setTimeout(()=>{ el.style.boxShadow=''; el.style.transform=''; }, 900);
-        }
-      });
+    const hotspots = document.querySelectorAll('.hotspot');
   
-      // keyboard accessibility: Enter/Space
-      btn.addEventListener('keydown', (ev)=>{
-        if(ev.key === 'Enter' || ev.key === ' '){
-          ev.preventDefault();
-          btn.click();
-        }
-      });
-    });
-  
-    // hover effect sull'immagine
+    // hover effect sull'immagine (funziona per tutti)
     const img = document.getElementById('planisphere');
-    document.querySelectorAll('.hotspot').forEach(h=>{
+    hotspots.forEach(h=>{
       h.addEventListener('mouseenter', ()=> {
-        img.style.filter = 'brightness(1.04) saturate(1.12) drop-shadow(0 6px 18px rgba(0,0,0,0.35))';
+        if(img){
+          img.style.filter = 'brightness(1.04) saturate(1.12) drop-shadow(0 6px 18px rgba(0,0,0,0.35))';
+        }
       });
       h.addEventListener('mouseleave', ()=> {
-        img.style.filter = 'saturate(1.05) contrast(1.02)';
+        if(img){
+          img.style.filter = 'saturate(1.05) contrast(1.02)';
+        }
       });
     });
   
-    // --- Optional: auto-posizionamento via data-x/data-y ---
-    // Se preferisci usare coordinate in pixel rispetto alla dimensione originale
-    // dell'immagine, puoi aggiungere data-x / data-y ai bottoni e decommentare la
-    // funzione sottostante. Lasciato qui come riferimento.
+    // Se ci sono ancora bottoni (fallback) — comportamento di scroll/animazione
+    hotspots.forEach(el => {
+      if(el.tagName === 'BUTTON'){ // comportamento esistente: scroll verso l'elemento nella stessa pagina
+        el.addEventListener('click', ()=>{
+          const id = el.getAttribute('data-target');
+          const targetEl = document.getElementById(id);
+          if(targetEl){
+            targetEl.scrollIntoView({behavior:'smooth', block:'start'});
+            targetEl.style.transition = 'box-shadow .45s ease, transform .25s ease';
+            targetEl.style.boxShadow = '0 20px 60px rgba(0,0,0,0.45)';
+            targetEl.style.transform = 'translateY(-6px)';
+            setTimeout(()=>{ targetEl.style.boxShadow=''; targetEl.style.transform=''; }, 900);
+          }
+        });
+  
+        // keyboard accessibility: Enter/Space su button
+        el.addEventListener('keydown', (ev)=>{
+          if(ev.key === 'Enter' || ev.key === ' '){
+            ev.preventDefault();
+            el.click();
+          }
+        });
+      } else if(el.tagName === 'A'){
+        // Lascia la navigazione naturale per <a>. Possiamo però supportare
+        // click con Modifiers: se l'utente tiene Shift/Ctrl apre in nuova scheda come al solito.
+        // Non interferiamo col comportamento nativo.
+      }
+    });
+  
+    // --- Optional: auto-posizionamento via data-x/data-y (se vuoi mappare hotspots rispetto all'immagine reale)
     function positionHotspotsFromData() {
       const image = document.getElementById('planisphere');
       if(!image) return;
@@ -53,12 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   
-    // Esegui all'avvio e al resize (se userai la funzione, decommenta la chiamata)
+    // Se vuoi usarla, decommenta la chiamata qui
     // positionHotspotsFromData();
+  
     window.addEventListener('resize', () => {
       clearTimeout(window._hpResize);
       window._hpResize = setTimeout(() => {
-        // se usi data-x/data-y, richiamare positionHotspotsFromData qui
         // positionHotspotsFromData();
       }, 80);
     });
