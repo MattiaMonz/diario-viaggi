@@ -68,8 +68,8 @@
   /* Hotspots */
   .hotspot{
     position:absolute;
-    width: var(--hotspot-size, 34px);
-    height: var(--hotspot-size, 34px);
+    width: var(--hotspot-size, 20px);
+    height: var(--hotspot-size, 20px);
     border-radius:50%;
     transform: translate(-50%,-50%) scale(1);
     border:2px solid rgba(255,255,255,0.9);
